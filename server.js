@@ -1,19 +1,12 @@
-const express = require('express');
-const graphqlHTTP = require('express-graphql');
+const { ApolloServer, gql } = require('apollo-server');
 
 const authMiddleware = require('./auth-middleware')
-const schema = require('./schema')
+const typeDefs = require('./schema')
 const resolvers = require('./resolvers')
 
-const app = express();
-app.use(authMiddleware);
+const server = new ApolloServer({ typeDefs, resolvers });
 
-app.use('/graphql', graphqlHTTP({
-  schema: schema,
-  rootValue: resolvers,
-  graphiql: true,
-}));
-
-app.listen(4000, () => {
-  console.log('Running a GraphQL API server at http://localhost:4000/graphql');
+// The `listen` method launches a web server.
+server.listen(4000).then(({ url }) => {
+    console.log(`🚀  Server ready at ${url}`);
 });

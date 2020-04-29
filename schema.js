@@ -1,14 +1,16 @@
-const { graphql, GraphQLSchema, GraphQLObjectType, GraphQLString } = require('graphql');
+const { gql } = require('apollo-server');
 
-const schema = new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: 'Query',
-    fields: () => ({
-      hello: {
-        type: GraphQLString,
-      }
-    })
-  })
-});
+const schema = gql(`
+  type User {
+    id: Int!
+    name: String!
+    email: String!
+  }
+  
+  type Query {
+    user(id: ID!): User
+    users: [User]
+  }
+`)
 
 module.exports = schema
