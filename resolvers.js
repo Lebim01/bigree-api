@@ -1,12 +1,10 @@
 const models = require('./sequelize/models')
 
 module.exports = {
-    Query : {
-        user(_, { id }){
-            return models.User.findByPk(id)
-        },
-        users(){
-            return models.User.findAll()
-        }
+    async user(_, { id }){
+        return await models.User.findByPk(id)
+    },
+    async users(){
+        return await models.User.findAll()
     }
 };
