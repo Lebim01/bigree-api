@@ -8,8 +8,6 @@ const resolvers = require('./resolvers')
 
 const app = express();
 
-app.use(bodyParser.json())
-
 app.use(authMiddleware)
 
 app.use(
