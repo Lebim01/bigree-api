@@ -6,10 +6,16 @@ const schema = buildSchema(`
     name: String!
     email: String!
   }
+
+  type AuthData {
+    idUser: Int!
+    token: String!
+  }
   
   type Query {
     user(id: ID!): User
     users: [User]
+    login(username: String!, password: String!): AuthData!
   }
 `)
 

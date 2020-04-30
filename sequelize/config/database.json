@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "gps",
-    "password": "123987xd",
-    "database": "gps",
+    "username": "gps_user",
+    "password": "123987xD",
+    "database": "gps_test",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": false
