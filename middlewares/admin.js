@@ -1,8 +1,4 @@
-const tokenMiddleware = require('./token')
-
-module.exports = [
-    tokenMiddleware,
-    (req, res, next) => {
-        
-    }
-]
+module.exports = (req, res, next) => {
+    req.isAdmin = false
+    next()
+}

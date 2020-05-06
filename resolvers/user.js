@@ -1,17 +1,16 @@
 const models = require('../sequelize/models')
-const { addMiddleware } = require('graphql-add-middleware');
 
-module.exports.middlewares = (schema) => {
-    addMiddleware(schema, 'Query.users', function (root, args, context, info, next) {
-        console.log('MIDDLEWARE DE Query.users')
-    });
-}
-
-module.exports.resolvers = {
-    async user({ id }){
+module.exports = {
+    async user({ id }, req){
+        /*if (!req.isAuth) {
+            throw new Error('Unauthenticated!')
+        }*/
         return await models.User.findByPk(id)
     },
-    async users(){
+    async users(args, req){
+        /*if (!req.isAuth) {
+            throw new Error('Unauthenticated!')
+        }*/
         return await models.User.findAll()
     }
-};
+}

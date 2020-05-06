@@ -1,9 +1,11 @@
 const jwt = require('jsonwebtoken')
-const tokenMiddleware = require('./token')
 
-module.exports = [
-    tokenMiddleware,
-    (req, res, next) => {
-        
+module.exports = async (req, res, next) => {
+    if (!req.token) {
+        req.isAuth = false
+        return next()
     }
-]
+
+    req.isAuth = true
+    next()
+}

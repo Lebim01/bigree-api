@@ -2,10 +2,10 @@
   "development": {
     "username": "gps_user",
     "password": "123987xD",
-    "database": "gps_test",
+    "database": "begree",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "operatorsAliases": false
+    "operatorsAliases": "0"
   },
   "test": {
     "username": "root",
