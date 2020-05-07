@@ -1,6 +1,8 @@
 const user = require('./user')
 const auth = require('./auth')
 const event = require('./event')
+const category = require('./category')
+const paymentmethod = require('./paymentmethod')
 
 /**
     Will return object with resolver object
@@ -8,5 +10,7 @@ const event = require('./event')
 module.exports = {
     ...user,
     ...auth,
-    ...event
+    ...event,
+    ...category,
+    ...paymentmethod
 }

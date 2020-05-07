@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.FLOAT,
     location: DataTypes.STRING,
     image: DataTypes.TEXT,
+    CategoryId: DataTypes.INTEGER,
     date: {
       type: DataTypes.DATE,
       get() {
@@ -20,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   Event.associate = function(models) {
     // associations can be defined here
     Event.hasMany(models.UserEvent)
+    Event.belongsTo(models.Category)
   };
   return Event;
 };

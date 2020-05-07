@@ -9,10 +9,13 @@ module.exports = {
             where: {
                 id
             },
-            include: {
-                model: models.UserEvent,
-                include: models.User
-            },
+            include: [
+                {
+                    model: models.UserEvent,
+                    include: models.User
+                },
+                models.Category
+            ],
         })
     },
     async events(args, req){
@@ -20,10 +23,13 @@ module.exports = {
             throw new Error('Unauthenticated!')
         }*/
         return await models.Event.findAll({
-            include: {
-                model: models.UserEvent,
-                include: models.User
-            }
+            include: [
+                {
+                    model: models.UserEvent,
+                    include: models.User
+                },
+                models.Category
+            ]
         })
     },
     async createEvent({ title, description, location, date, image, price }){
@@ -42,5 +48,34 @@ module.exports = {
         await event.save();
 
         return event;
-    }
+    },
+    async updateEvent({ id, title, description, location, date, image, price }){
+        /*if (!req.isAuth) {
+            throw new Error('Unauthenticated!')
+        }*/
+        let event = await models.Event.findByPk(id)
+
+        event.title = title
+        event.description = description
+        event.location = location
+        event.date = date
+        event.image = image
+        event.price = price
+
+        await event.save();
+
+        return event;
+    },
+    async asistEvent({ idEvent }){
+        /*if (!req.isAuth) {
+            throw new Error('Unauthenticated!')
+        }*/
+        const event = models.UserEvent.build({
+            EventID: idEvent
+        });
+
+        await event.save();
+
+        return event;
+    },
 }
