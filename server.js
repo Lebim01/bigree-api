@@ -11,7 +11,6 @@ const app = express();
 /**
  * Middlewares
  */
-app.use(bodyParser.json())
 app.use(
     [
         require('./middlewares/token'),
@@ -19,6 +18,7 @@ app.use(
         require('./middlewares/admin')
     ]
 )
+app.use(bodyParser.json())
 
 app.use(
     '/graphql',

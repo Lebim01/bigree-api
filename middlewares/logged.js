@@ -6,6 +6,14 @@ module.exports = async (req, res, next) => {
         return next()
     }
 
-    req.isAuth = true
-    next()
+    try {
+        const verify = await jwt.verify(req.token, process.env.HASH);
+        req.idUser = verify.userId
+        req.email = verify.email
+        req.isAuth = true
+    }catch(err){
+        
+    }finally{
+        next()
+    }
 }

@@ -1,10 +1,8 @@
+const { Op, Sequelize } = require("sequelize");
 const models = require('../sequelize/models')
 
 module.exports = {
     async event({ id }, req){
-        /*if (!req.isAuth) {
-            throw new Error('Unauthenticated!')
-        }*/
         return await models.Event.findOne({
             where: {
                 id
@@ -18,10 +16,17 @@ module.exports = {
             ],
         })
     },
-    async events(args, req){
-        /*if (!req.isAuth) {
-            throw new Error('Unauthenticated!')
-        }*/
+    async events({ search }, req){
+        let where = {}
+        
+        if(search){
+            where[Op.or] = [
+                Sequelize.where(Sequelize.fn('lower', Sequelize.col('title')), 'LIKE', `%${search}%`),
+                Sequelize.where(Sequelize.fn('lower', Sequelize.col('description')), 'LIKE', `%${search}%`),
+                Sequelize.where(Sequelize.fn('lower', Sequelize.col('location')), 'LIKE', `%${search}%`),
+            ]
+        }
+
         return await models.Event.findAll({
             include: [
                 {
@@ -29,13 +34,14 @@ module.exports = {
                     include: models.User
                 },
                 models.Category
-            ]
+            ],
+            where
         })
     },
     async createEvent({ title, description, location, date, image, price }){
-        /*if (!req.isAuth) {
+        if (!req.isAuth) {
             throw new Error('Unauthenticated!')
-        }*/
+        }
         const event = models.Event.build({
             title,
             description,
@@ -50,9 +56,9 @@ module.exports = {
         return event;
     },
     async updateEvent({ id, title, description, location, date, image, price }){
-        /*if (!req.isAuth) {
+        if (!req.isAuth) {
             throw new Error('Unauthenticated!')
-        }*/
+        }
         let event = await models.Event.findByPk(id)
 
         event.title = title
@@ -66,12 +72,13 @@ module.exports = {
 
         return event;
     },
-    async asistEvent({ idEvent }){
-        /*if (!req.isAuth) {
+    async asistEvent({ idEvent }, req){
+        if (!req.isAuth) {
             throw new Error('Unauthenticated!')
-        }*/
+        }
         const event = models.UserEvent.build({
-            EventID: idEvent
+            EventId: idEvent,
+            UserId: req.idUser
         });
 
         await event.save();
