@@ -52,7 +52,7 @@ const schema = buildSchema(`
   }
 
   type RootMutation {
-    register(username: String!, password: String!, name: String!): User
+    register(username: String!, password: String!, name: String!, country : String, city : String, image : String): User
 
     createEvent(title: String!, description: String! location: String!, date: String! price: Float!, image: String!): Event
     updateEvent(id: ID!, title: String!, description: String! location: String!, date: String! price: Float!, image: String!): Event

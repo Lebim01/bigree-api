@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const models = require('../sequelize/models')
 
 module.exports = {
-    async register({ username, name, password }){
+    async register({ username, name, password, country, city, image }){
         try {
             const _isExistUser = await models.User.findOne({ where: { email: username } })
             if(_isExistUser){
@@ -15,7 +15,10 @@ module.exports = {
             const user = models.User.build({
                 email: username,
                 name,
-                password: hashedPassword
+                password: hashedPassword,
+                country,
+                city,
+                image
             });
 
             await user.save();
