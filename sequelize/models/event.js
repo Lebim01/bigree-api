@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     Event.hasMany(models.UserEvent)
     Event.belongsTo(models.Category)
     Event.belongsTo(models.User, {
+      as: 'Host',
       foreignKey: {
         name: 'HostId'
       }

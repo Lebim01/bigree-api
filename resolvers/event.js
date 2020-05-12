@@ -12,19 +12,16 @@ module.exports = {
                     model: models.UserEvent,
                     include: models.User
                 },
+                'Host',
                 models.Category
             ],
         })
     },
     async events({ search, own }, req){
-        let where = {
-            [Op.or] : [],
-            [Op.and] : []
-        }
+        let where = {}
         
         if(search){
             where[Op.or] = [
-                ...where[Op.or],
                 Sequelize.where(Sequelize.fn('lower', Sequelize.col('title')), 'LIKE', Sequelize.fn('lower',`%${search}%`)),
                 Sequelize.where(Sequelize.fn('lower', Sequelize.col('description')), 'LIKE', Sequelize.fn('lower',`%${search}%`)),
                 Sequelize.where(Sequelize.fn('lower', Sequelize.col('location')), 'LIKE', Sequelize.fn('lower',`%${search}%`)),
@@ -33,7 +30,6 @@ module.exports = {
 
         if(own && req.isAuth){
             where[Op.and] = [
-                ...where[Op.and],
                 {
                     HostId: req.idUser
                 }
@@ -46,6 +42,7 @@ module.exports = {
                     model: models.UserEvent,
                     include: models.User
                 },
+                'Host',
                 models.Category
             ],
             where
@@ -55,6 +52,7 @@ module.exports = {
         if (!req.isAuth) {
             throw new Error('Unauthenticated!')
         }
+        
         const event = models.Event.build({
             title,
             description,

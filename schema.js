@@ -27,6 +27,7 @@ const schema = buildSchema(`
     image: String!
     UserEvents: [UserEvent]
     Category: Category
+    Host: User
   }
 
   type PaymentMethod {
