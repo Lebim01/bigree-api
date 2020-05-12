@@ -1,0 +1,10 @@
+stages:
+  - despliegue-produccion
+
+descarga-cambios:
+  stage: despliegue-produccion
+  only:
+    - produccion
+  script:
+    - cd /var/www/api-begree
+    - git pull origin produccion

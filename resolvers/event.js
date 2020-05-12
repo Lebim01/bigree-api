@@ -17,7 +17,7 @@ module.exports = {
             ],
         })
     },
-    async events({ search, own }, req){
+    async events({ search, own, popular }, req){
         let query = {}
         let where = {}
         
