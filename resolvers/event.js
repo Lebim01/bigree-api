@@ -17,14 +17,17 @@ module.exports = {
         })
     },
     async events({ search, own }, req){
-        let where = {}
+        let where = {
+            [Op.or] : [],
+            [Op.and] : []
+        }
         
         if(search){
             where[Op.or] = [
                 ...where[Op.or],
-                Sequelize.where(Sequelize.fn('lower', Sequelize.col('title')), 'LIKE', `%${search}%`),
-                Sequelize.where(Sequelize.fn('lower', Sequelize.col('description')), 'LIKE', `%${search}%`),
-                Sequelize.where(Sequelize.fn('lower', Sequelize.col('location')), 'LIKE', `%${search}%`),
+                Sequelize.where(Sequelize.fn('lower', Sequelize.col('title')), 'LIKE', Sequelize.fn('lower',`%${search}%`)),
+                Sequelize.where(Sequelize.fn('lower', Sequelize.col('description')), 'LIKE', Sequelize.fn('lower',`%${search}%`)),
+                Sequelize.where(Sequelize.fn('lower', Sequelize.col('location')), 'LIKE', Sequelize.fn('lower',`%${search}%`)),
             ]
         }
 
