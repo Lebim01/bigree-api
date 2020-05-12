@@ -75,7 +75,7 @@ const schema = buildSchema(`
     users: [User]
 
     event(id: ID!): Event
-    events(search: String): [Event]
+    events(search: String, own: Boolean): [Event]
 
     categories: [Category]
     category(id: ID!): Category

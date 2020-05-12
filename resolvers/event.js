@@ -16,14 +16,24 @@ module.exports = {
             ],
         })
     },
-    async events({ search }, req){
+    async events({ search, own }, req){
         let where = {}
         
         if(search){
             where[Op.or] = [
+                ...where[Op.or],
                 Sequelize.where(Sequelize.fn('lower', Sequelize.col('title')), 'LIKE', `%${search}%`),
                 Sequelize.where(Sequelize.fn('lower', Sequelize.col('description')), 'LIKE', `%${search}%`),
                 Sequelize.where(Sequelize.fn('lower', Sequelize.col('location')), 'LIKE', `%${search}%`),
+            ]
+        }
+
+        if(own && req.isAuth){
+            where[Op.and] = [
+                ...where[Op.and],
+                {
+                    HostId: req.idUser
+                }
             ]
         }
 
@@ -48,7 +58,8 @@ module.exports = {
             location,
             date,
             image,
-            price
+            price,
+            HostId: req.idUser
         });
 
         await event.save();

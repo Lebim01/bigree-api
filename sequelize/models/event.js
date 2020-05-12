@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     location: DataTypes.STRING,
     image: DataTypes.TEXT,
     CategoryId: DataTypes.INTEGER,
+    HostId: DataTypes.INTEGER,
     date: {
       type: DataTypes.DATE,
       get() {
@@ -22,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Event.hasMany(models.UserEvent)
     Event.belongsTo(models.Category)
+    Event.belongsTo(models.User, {
+      foreignKey: {
+        name: 'HostId'
+      }
+    })
   };
   return Event;
 };
