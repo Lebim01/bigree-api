@@ -51,6 +51,7 @@ module.exports = {
 
             const host=req.get('host');
             const link="http://"+host+"/verify?id="+hashedToken;
+            var image2 = image.replace(" ", "&");
 
             const user = models.User.build({
                 email: username,
@@ -58,7 +59,7 @@ module.exports = {
                 password: hashedPassword,
                 country,
                 city,
-                image,
+                image : image2,
                 tokenVerify: hashedToken,
                 status: 'pending'
             });
