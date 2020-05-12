@@ -14,6 +14,7 @@ module.exports = {
           location: 'Estadio mariscal',
           image: 'https://www.google.com.mx/url?sa=i&url=https%3A%2F%2Fquepasaenmazatlanenlinea.com%2F2020%2F01%2F07%2Festo-es-lo-que-sabemos-sobre-el-somos-musik-fest-el-festival-musical-que-llegara-a-mazatlan-en-semana-de-pascua%2F&psig=AOvVaw1_Sszk4lpD-4ZOL0fTKusB&ust=1588832637356000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPj__v3MnukCFQAAAAAdAAAAABAD',
           CategoryId: 2,
+          HostId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -25,6 +26,7 @@ module.exports = {
           location: 'Caracas, Venezuela',
           image: 'https://www.google.com.mx/url?sa=i&url=https%3A%2F%2Fwww.notitarde.com%2Fcanserbero-a-cuatro%2F&psig=AOvVaw2v7xPGiAxURQIvEj-6oBFH&ust=1588832692820000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPDp2pXNnukCFQAAAAAdAAAAABAI',
           CategoryId: 5,
+          HostId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -36,6 +38,7 @@ module.exports = {
           location: 'Mexico city',
           image: 'https://www.google.com.mx/url?sa=i&url=https%3A%2F%2Fwww.producerloops.com%2FDownload-Mainroom-Warehouse-EDM-Fest-3.html&psig=AOvVaw11ovKg5Er7fyoVJiVq0cuV&ust=1588832784368000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPi878HNnukCFQAAAAAdAAAAABAI',
           CategoryId: 3,
+          HostId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         }

@@ -12,6 +12,7 @@ module.exports = {
           email: 'victoralvarezsaucedo@gmail.com',
           password: await bcrypt.hash('123987xd', 10),
           image: 'https://lh3.googleusercontent.com/a-/AOh14Gip16U5TkwGTF0ksIZGG4rzRYLumbQ6t7ZY9xeT-w=s288-c-rg-br100',
+          status: 'Active',
           createdAt: new Date(),
           updatedAt: new Date()
         }
