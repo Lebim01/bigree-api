@@ -18,6 +18,7 @@ module.exports = {
         })
     },
     async events({ search, own }, req){
+        let query = {}
         let where = {}
         
         if(search){
@@ -36,6 +37,10 @@ module.exports = {
             ]
         }
 
+        if(popular){
+            query.limit = 10
+        }
+
         return await models.Event.findAll({
             include: [
                 {
@@ -45,7 +50,8 @@ module.exports = {
                 'Host',
                 models.Category
             ],
-            where
+            where,
+            ...query
         })
     },
     async createEvent({ title, description, location, date, image, price }){

@@ -24,6 +24,7 @@ const schema = buildSchema(`
     location: String!
     date: String!
     price: Float!
+    capacity: Int!
     image: String!
     UserEvents: [UserEvent]
     Category: Category
@@ -76,7 +77,7 @@ const schema = buildSchema(`
     users: [User]
 
     event(id: ID!): Event
-    events(search: String, own: Boolean): [Event]
+    events(search: String, own: Boolean, popular: String): [Event]
 
     categories: [Category]
     category(id: ID!): Category
