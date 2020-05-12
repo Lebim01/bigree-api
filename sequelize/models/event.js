@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.TEXT,
     CategoryId: DataTypes.INTEGER,
     HostId: DataTypes.INTEGER,
+    capacity: DataTypes.INTEGER,
     date: {
       type: DataTypes.DATE,
       get() {

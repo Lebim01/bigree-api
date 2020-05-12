@@ -88,13 +88,25 @@ module.exports = {
         if (!req.isAuth) {
             throw new Error('Unauthenticated!')
         }
-        const event = models.UserEvent.build({
-            EventId: idEvent,
+
+        const event = await models.Event.findByPk(idEvent)
+        const asists = await models.UserEvent.count({
+            where : {
+                EventId: event.id
+            }
+        })
+
+        if(asists >= event.capacity) {
+            throw new Error('No hay capacidad para este evento')
+        }
+
+        const asist = models.UserEvent.build({
+            EventId: event.id,
             UserId: req.idUser
         });
 
-        await event.save();
+        await asist.save();
 
-        return event;
+        return asist;
     },
 }
