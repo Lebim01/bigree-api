@@ -51,9 +51,19 @@ const schema = buildSchema(`
     tokenExpiration: String!
   }
 
-  type RootMutation {
-    register(username: String!, password: String!, name: String!, country : String, city : String, image : String): User
+  type EmailSendStatus {
+    message: String
+    status: Boolean!
+  }
 
+  type Verificado {
+    message: String
+    status: Boolean
+  }
+
+  type RootMutation {
+    register(username: String!, password: String!, name: String!, country : String, city : String, image : String): EmailSendStatus
+    verifyEmail(tokenverify:String): Verificado
     createEvent(title: String!, description: String! location: String!, date: String! price: Float!, image: String!): Event
     updateEvent(id: ID!, title: String!, description: String! location: String!, date: String! price: Float!, image: String!): Event
     asistEvent(idEvent: ID!): EventAsist
